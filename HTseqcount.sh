@@ -15,7 +15,7 @@ conda activate QAA
 sam=$1
 gtf=$2
 output=$3
-#capture run stats then align reads.
+
 /usr/bin/time -v \
     htseq-count --stranded=yes $sam $gtf > $output"stranded.txt"
 
