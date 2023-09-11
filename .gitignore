@@ -1,10 +1,18 @@
+Mousedb
+*.zip
+Trimmed_reads
+qscores
+DBfiles
+8_2F_aligned
+14_3B_aligned
 # bioinfo files
+
 *.fastq
 *.fastq.gz
 *.fq
 *.fq.gz
 .fasta
-.fa
+*.fa
 .fasta.gz
 .fa.gz
 *.sam
