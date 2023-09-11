@@ -97,12 +97,12 @@ Review the [metadata](./metadata) available to you and see if this information l
 # To turn in your work for this assignment
 
 ## Upload your:
-- [ ] lab notebook,
-- [ ] Talapas batch script/code, 
-- [ ] FastQC plots, 
-- [ ] counts files generated from htseq-count (in a folder would be nice),
+- [x] lab notebook,
+- [x] Talapas batch script/code, 
+- [x] FastQC plots, 
+- [x] counts files generated from htseq-count (in a folder would be nice),
 - [ ] pdf report (see below), 
-- [ ] and any additional plots, code, or code output
+- [x] and any additional plots, code, or code output
 
 to GitHub.
     
