@@ -1,0 +1,6 @@
+/usr/bin/time: missing program to run
+Try '/usr/bin/time --help' for more information.
+100000 GFF lines processed.
+200000 GFF lines processed.
+300000 GFF lines processed.
+slurmstepd: error: *** JOB 54106 ON n0185 CANCELLED AT 2023-09-10T20:24:50 ***

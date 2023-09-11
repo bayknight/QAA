@@ -465,8 +465,28 @@ Align reads using Align_reads.sh --parameters were given by Leslie(look more int
 slurm files:/projects/bgmp/bailey/bioinfo/Bi623/Assignments/QAA/slurm-54075.out
 /projects/bgmp/bailey/bioinfo/Bi623/Assignments/QAA/slurm-54076.out
 
+Check mapped and unmapped reads using python script:
+Python reads mapped 14_3B:
+./SAM_Bitflag_parse.py -f /projects/bgmp/bailey/bioinfo/Bi623/Assignments/QAA/14_3B_aligned/14_3B_control_S10_L008Aligned.out.sam
+mapped unique reads: 8312388     unmapped reads: 180916
 
-htseqcount slurm linked below:
+Python reads mapped 8_2F:
+./SAM_Bitflag_parse.py -f 8_2F_aligned/8_2F_fox_S7_L008Aligned.out.sam >> 
+Mapped_reads/8_2F_mapped_counts.txt
+mapped unique reads: 67070899	 unmapped reads: 2511415
+
+htseqcount script below for counting genes mapped:
 /projects/bgmp/bailey/bioinfo/Bi623/Assignments/QAA/HTseqcount.sh
-
+slurm:
+/projects/bgmp/bailey/bioinfo/Bi623/Assignments/QAA/slurm-54110.out
+slurm other data:
+/projects/bgmp/bailey/bioinfo/Bi623/Assignments/QAA/slurm-54109.out
 script runs stranded=reverse and stranded=yes
+
+Overall 14_3b continued to be about an order of magnitude less reads than 8_2F
+which seemed encouraging considering it started with about 10x less reads.
+
+
+
+Completed: 11 Spetember 2023
+Bailey Knight
