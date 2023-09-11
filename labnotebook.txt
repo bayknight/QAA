@@ -20,7 +20,9 @@ Trim reads based on quality using trimmomatic
 Made script to plot read length distribution.
 Database and alignment:
 Make database using STAR software
-Align
+Align reads using STAR
+Count mapped and unmapped using python script
+Count genes mapped using htseq count for forward and reverse
 
 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
