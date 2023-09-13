@@ -134,7 +134,7 @@ kable(Mapped_reads, booktabs =T)%>%
   kable_styling(font_size = 10, latex_options = c("hold_position", "striped"))
 
 ```
-**Table3:** Percent mapped reads for
+**Table3:** Percent mapped reads for custom python script. Secondary alignments were not counted as part of the total value for Mapped reads.
 ```{r echo=FALSE}
 Percent_Mapped = data.frame(Sample =c('14_3B_control_s10','8_2F_fox_S7'),
                             Percent.Mapped.htseq.Reverse = c(86.3475, 80.5948),
