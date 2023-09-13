@@ -184,6 +184,7 @@ conda create -n QAA
 conda install cutadapt=4.4
 conda install trimmomatic=0.39
 ================================================================================================================
+
 path to slurm script
 /projects/bgmp/bailey/bioinfo/Bi623/Assignments/QAA/Trimmed_reads/cutadapt.sh
 
@@ -246,7 +247,13 @@ Data plotted in python can be found:
 The data looked similar between the two reads.
 most were 101bp
 -------------------------------------------------------------------------
-
+Adapter Search: 
+==============================================================================================
+zcat /projects/bgmp/bailey/bioinfo/Bi623/Assignments/QAA/Trimmed_reads/trimmed_R1_8_2F_fox_S7_L008_R1_001.fastq.gz | grep -c "AGATCGGAAGAGCACACGTCTGAACTCCAGTCA"
+zcat /projects/bgmp/bailey/bioinfo/Bi623/Assignments/QAA/Trimmed_reads/trimmed_R2_8_2F_fox_S7_L008_R2_001.fastq.gz | grep -c "AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT"
+zcat /projects/bgmp/bailey/bioinfo/Bi623/Assignments/QAA/Trimmed_reads/trimmed_R1_14_3B_control_S10_L008_R1_001.fastq.gz | grep -c "AGATCGGAAGAGCACACGTCTGAACTCCAGTCA"
+zcat /projects/bgmp/bailey/bioinfo/Bi623/Assignments/QAA/Trimmed_reads/trimmed_R2_14_3B_control_S10L008_R2_001.fastq.gz | grep -c "AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT"
+===========================================================================================
 Next is to get ensemble data:
 will put in follwoing path:
 /projects/bgmp/bailey/bioinfo/Bi623/Assignments/QAA/Mousedb
@@ -488,7 +495,16 @@ script runs stranded=reverse and stranded=yes
 Overall 14_3b continued to be about an order of magnitude less reads than 8_2F
 which seemed encouraging considering it started with about 10x less reads.
 
-
-
+Counting reads
+=====================================================================================================================================
+(base) [bailey@login2 HTseq_output]$ awk '{total+=$2} $1~"__" {sum+=$2} END {print (total-sum)/total*100}' 8_2Freverse.txt 
+80.5948
+(base) [bailey@login2 HTseq_output]$ awk '{total+=$2} $1~"__" {sum+=$2} END {print (total-sum)/total*100}' 8_2Fstranded.txt 
+3.624
+(base) [bailey@login2 HTseq_output]$ awk '{total+=$2} $1~"__" {sum+=$2} END {print (total-sum)/total*100}' 14_3B_controlreverse.txt 
+86.3475
+(base) [bailey@login2 HTseq_output]$ awk '{total+=$2} $1~"__" {sum+=$2} END {print (total-sum)/total*100}' 14_3B_controlstranded.txt 
+3.87395
+======================================================================================================================================
 Completed: 11 Spetember 2023
 Bailey Knight
