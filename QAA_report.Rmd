@@ -78,6 +78,7 @@ include_graphics("/Users/bailey/bioinfo/Bi623/Assignments/QAA/Figures/14_3B_R2_N
 Overall due to the quality scores generally being greater than 35 I would recommend this data to be used. Although read data is more variable this is expected considering the nature of the sequencing.  Proceed with greater caution with 14_3B_control as the per tile sequence quality had a streaked area for concern on the flow cell. Although this is a cause for concern, considering the overall quality score distribution the data can move forward for preprocessing and mapping. If data has poor results for mapping, it may be worth to filter out more poor quality cells.\
 
 # Part 2 – Adapter and Quality-based Trimming
+**Table 1:** Adapter Trimming using cutadapt for read pairs of both samples processed and written using cutadapt displayed in both read pairs and total basepairs. \
 ```{r echo=FALSE}
 cutadapt = data.frame(Sample =c('14_3B_control_s10','8_2F_fox_S7'),
                       Reads.Processed=c(4440378, 36482601),
@@ -92,8 +93,8 @@ kable(cutadapt, booktabs =T)%>%
   kable_styling(latex_options = c("hold_position", "scale_down"))
   
 ```
-**Table 1:** Adapter Trimming using cutadapt for read pairs of both samples processed and written using cutadapt displayed in both read pairs and total basepairs. \
 
+**Table 2:** Quality Trimming using trimmomatic for read pairs of both samples. Pairs processed using trimmomatic displayed. Less than 1% reads dropped for both read pairs. \
 ```{r, echo=FALSE}
 
 trimmomatic = data.frame(Sample =c('14_3B_control_s10','8_2F_fox_S7'),
@@ -109,7 +110,7 @@ kable(trimmomatic, booktabs =T)%>%
 
 
 ```
-**Table 2:** Quality Trimming using trimmomatic for read pairs of both samples. Pairs processed using trimmomatic displayed. Less than 1% reads dropped for both read pairs. \
+
 
 ```{r out.width="250px", echo=FALSE}
 include_graphics("/Users/bailey/bioinfo/Bi623/Assignments/QAA/Figures/trimmed_R1_8_2F_fox_S7_L008_R1_001.fastq.gz_hist.png")
@@ -122,6 +123,8 @@ include_graphics("/Users/bailey/bioinfo/Bi623/Assignments/QAA/Figures/trimmed_R1
 Cutadapt was used followed by Trimmomatic for adapter trimming and quality filtering. Setting for each can be found in labnotebook.txt referenced in "General Workflow" section of the report. Adapter trimming trimmed 6% and 5.9% of sequences for reads 1 and 2 respectively for 14_3B_control_s10. Adapter trimming trimmed 6.7% and 6.6% of sequences for reads 1 and 2 respectively for 8_2F_fox_S7. Trimmomatic quality filtered out a total of 0.09% and 0.18% reads for 8_2F_fox_S7 and 14_3B_control_s10 resepctively. The adapter trimming for both reads was nearly identical for the forward and reverse reads as expected since they are compliments. The quality forward reads were trimmed at a higher rate than the reverse reads by nearly two orders of magnitude. Read 2 had consistently greater frequency of low length reads than Read 1 as expected considering idle time for read 2 on the sequencer while read 1 is being read. \
 
 # Part 3 Alignment and Mapping
+
+**Table3:** Percent mapped reads for custom python script. Secondary alignments were not counted as part of the total value for Mapped reads.
 ```{r echo=FALSE}
 Percent_mapped14 = (8312388/(180916+8312388)*100)
 Percent_mapped8 = (67070899/(2511415+67070899)*100)
@@ -134,7 +137,8 @@ kable(Mapped_reads, booktabs =T)%>%
   kable_styling(font_size = 10, latex_options = c("hold_position", "striped"))
 
 ```
-**Table3:** Percent mapped reads for custom python script. Secondary alignments were not counted as part of the total value for Mapped reads.
+**Table 4:** Post-mapping analysis of htseq parameters for read counts that map to features. Stranded parameters used were "--stranded=yes" and "--stranded=reverse". Percents represent percent of reads that mapped to features using the parameters previously specified.
+Command used to generate percentages: awk '{total+=$2} $1~"__" {sum+=$2} END {print (total-sum)/total*100}' filepath.
 ```{r echo=FALSE}
 Percent_Mapped = data.frame(Sample =c('14_3B_control_s10','8_2F_fox_S7'),
                             Percent.Mapped.htseq.Reverse = c(86.3475, 80.5948),
@@ -144,8 +148,7 @@ kable(Percent_Mapped, booktabs =T)%>%
   kable_styling(font_size = 10, latex_options = c("hold_position", "striped"))
 
 ```
-**Table 4:** Post-mapping analysis of htseq parameters for read counts that map to features. Stranded parameters used were "--stranded=yes" and "--stranded=reverse". Percents represent percent of reads that mapped to featurs using the parameters previously specified.
-Command used to generate percentages: awk '{total+=$2} $1~"__" {sum+=$2} END {print (total-sum)/total*100}' filepath.
+
 
 ## Part 3 Discussion
 Mouse Genome fasta and GTF files were acquired from ensemble. Links can be found under the "General Workflow" section. A database was generated using STAR software and the two files mentioned previously. The trimmed and filtered sequences of each sample were then aligned against the database using the STAR software. A SAM file was generated from the alignment that was then run through a custom python script. The script counted mapped and unmapped reads while ignoring any seconday alignments. Htseq was run on the SAM files using "--stranded=yes" and "--stranded=reverse" and mapping percentages were calculated. "stranded--reverse" yielded 80.6% and 86.9% mapped compared to 3.6% and 3.9% mapped for 8_2Freverse and 14_3b_control respectively. This indicates the RNAseq run is paired end and stranded run because the "reverse" option takes read order and orientation into account during comparison.
